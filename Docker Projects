@@ -18,4 +18,5 @@
           -> start an docker services #sudo systemctl start docker
           -> verify services is started #sudo systemctl status docker (if failure reported kindly analize logs #journalctl -u docker  )
 - [x] validate the changes for Docker host IP details :  # ip address show docker0
+- [x] Run an docker container & validation assigned IP range for container using #docker inspect containerID command 
 
