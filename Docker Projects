@@ -6,12 +6,16 @@
 - [x] Steps to Modify Existing docker host IP : 
           -> Stop an docker services #sudo systemctl stop docker
           -> Modify configuration file #sudo vi /etc/docker/daemon.json to include feild  "bip": "192.168.100.1/24" save an exist the daemon.json files 
-'''ubuntu $ cat /etc/docker/daemon.json 
-{
-  "exec-opts": ["native.cgroupdriver=systemd"],
-  "log-driver": "json-file",
-  "storage-driver": "overlay2",
-  "registry-mirrors": ["https://mirror.gcr.io","https://docker-mirror.killercoda.com","https://docker-mirror.killer.sh"],
-  "mtu": 1454,
-  "bip": "192.168.100.1/24"
-}'''
+              $ cat /etc/docker/daemon.json 
+             {
+                  "exec-opts": ["native.cgroupdriver=systemd"],
+                  "log-driver": "json-file",
+                  "storage-driver": "overlay2",
+                  "registry-mirrors": ["https://mirror.gcr.io","https://docker-mirror.killercoda.com","https://docker-mirror.killer.sh"],
+                  "mtu": 1454,
+                  "bip": "192.168.100.1/24"
+             }
+          -> start an docker services #sudo systemctl start docker
+          -> verify services is started #sudo systemctl status docker (if failure reported kindly analize logs #journalctl -u docker  )
+- [x] validate the changes for Docker host IP details :  # ip address show docker0
+
