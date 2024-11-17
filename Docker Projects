@@ -1,0 +1,17 @@
+**Docker Project 1: Setup Docker Host on user defined Network**
+
+- [x] Use Case : Customer wants to Setup an Docker Host networks on User define IP address so that containers will launch followed specify IP Ranges.
+- [x] Customer Provided Details : CIDR notation 192.168.100.1/24 
+- [x] Way to check current Docker host IP details :  # ip address show docker0
+- [x] Steps to Modify Existing docker host IP : 
+          -> Stop an docker services #sudo systemctl stop docker
+          -> Modify configuration file #sudo vi /etc/docker/daemon.json to include feild  "bip": "192.168.100.1/24" save an exist the daemon.json files 
+'''ubuntu $ cat /etc/docker/daemon.json 
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "storage-driver": "overlay2",
+  "registry-mirrors": ["https://mirror.gcr.io","https://docker-mirror.killercoda.com","https://docker-mirror.killer.sh"],
+  "mtu": 1454,
+  "bip": "192.168.100.1/24"
+}'''
