@@ -5,6 +5,7 @@ RUN apt-get update && \
     pip install -r requirements.txt && \
     cd devops
 COPY requirements.txt /app
+ENV DEBAIN_FRONTEND=noninteractive
 COPY devops /app
 ENTRYPOINT ["python3"]
 CMD ["manage.py", "runserver", "0.0.0.0:8000"]
