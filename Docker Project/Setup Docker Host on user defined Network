@@ -1,0 +1,25 @@
+Setup Docker Host on user defined Network
+
+- [x] Use Case : Customer wants to Setup an Docker Host networks on User define IP address so that containers will launch followed specify IP Ranges.
+- [x] Customer Provided Details : CIDR notation 192.168.100.1/24 
+- [x] Way to check current Docker host IP details :  # ip address show docker0
+- [x] Steps to Modify Existing docker host IP : 
+      ** Its important to know IP address assigment follow the docker network drivers so by default we have bridge network driver that assign IP to Container & docker host but there is no direct vai to modify IP of bridge driver other way
+         is to create an Custom bridge network driver with specific IP and launch an Container follow custom bridge driver.
+
+     **Way to setup IP using Global method by making change under /etc/docker/daemon.json**  
+          -> Stop an docker services #sudo systemctl stop docker
+          -> Modify configuration file #sudo vi /etc/docker/daemon.json to include feild  "bip": "192.168.100.1/24" save an exist the daemon.json files 
+              $ cat /etc/docker/daemon.json 
+             {
+                  "exec-opts": ["native.cgroupdriver=systemd"],
+                  "log-driver": "json-file",
+                  "storage-driver": "overlay2",
+                  "registry-mirrors": ["https://mirror.gcr.io","https://docker-mirror.killercoda.com","https://docker-mirror.killer.sh"],
+                  "mtu": 1454,
+                  "bip": "192.168.100.1/24"
+             }
+          -> start an docker services #sudo systemctl start docker
+          -> verify services is started #sudo systemctl status docker (if failure reported kindly analize logs #journalctl -u docker  )
+- [x] validate the changes for Docker host IP details :  # ip address show docker0
+- [x] Run an docker container & validation assigned IP range for container using #docker inspect containerID command.
