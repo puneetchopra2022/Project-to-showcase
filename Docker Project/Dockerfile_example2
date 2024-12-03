@@ -9,3 +9,8 @@
 
 From busybox
 HEALTHCHECK --interval=3s CMD ping -c 1 172.17.0.5
+
+
+#####
+#docker build .
+#docker run -dt <imageid> sleep 5000
