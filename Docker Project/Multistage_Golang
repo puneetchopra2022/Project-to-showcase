@@ -16,7 +16,7 @@ COPY --from=build /app /app
 ENTRYPOINT ["/app"]
 
 
-###############################
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 From golang:1.22 AS build
 WORKDIR /src
 COPY go.mod go.mod
@@ -40,8 +40,7 @@ CMD ["/app"]
 
 
 
-==========
-
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 From golang:1.22 AS build
 WORKDIR /src
 COPY go.mod go.mod
@@ -61,3 +60,29 @@ COPY --from=build /app /app
 #run the application
 EXPOSE 8000
 CMD ["/app"]
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+# Stage 1 
+FROM node:21 As backend-builder 
+
+#setup the working Dir
+WOKDIR /app
+
+#code copy 
+COPY .  .
+
+RUN npm i
+
+#stage 2 
+FROM node:21-slim
+
+#setup the working dir 
+WOKDIR /app
+
+#copy the above stage as compressed stage 
+COPY --from=backend-builder /app .
+COPY .env.sample .env
+EXPOSE 5000
+CMD ["npm", "start"] 
