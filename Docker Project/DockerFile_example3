@@ -1,0 +1,7 @@
+
+FROM busybox
+ENTRYPOINT [‘’/bin/ping ’’]
+
+
+#docker build .
+#docker run -dt <imageid> -c 1 8.8.8.8
